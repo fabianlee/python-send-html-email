@@ -50,11 +50,6 @@ from email.mime.text import MIMEText
 from email.mime.image import MIMEImage
 from email.mime.base import MIMEBase
 
-# googleapi oauth
-import pickle
-from googleapiclient.discovery import build
-from google_auth_oauthlib.flow import InstalledAppFlow
-from google.auth.transport.requests import Request
 
 
 script_path = os.path.dirname(os.path.abspath(__file__))
@@ -174,7 +169,16 @@ def send_message_to_google(message, sender):
     Requires local 'credentials.json' for Gmail API
     https://developers.google.com/gmail/api/quickstart/python
     """
+
+    # googleapi oauth
+    # put here in the function so that users doing relay don't require install
+    import pickle
+    from googleapiclient.discovery import build
+    from google_auth_oauthlib.flow import InstalledAppFlow
+    from google.auth.transport.requests import Request
+
     SCOPES = 'https://www.googleapis.com/auth/gmail.send'
+
     creds = None
     # The file token.pickle stores the user's access and refresh tokens, and is
     # created automatically when the authorization flow completes for the first
